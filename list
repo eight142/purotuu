@@ -28,11 +28,39 @@ list insert(list p, position k, int e) {
     n->prev = k;
 }
 
+void delete(list p, position k) {
+    if(k->prev) {
+        if(k->next) {
+            k->next->prev = k->prev;
+            k->prev->next = k->next;
+            free(k);
+        } else {
+            k->prev->next = NULL;
+            free(k);
+        }
+    }
+}
+
 void printlist(struct node p) {
     while(p.next != NULL) {
         p = *(p.next);
         printf("%d ", p.element);
     }
+    printf("\n");
+}
+
+void printlist_reverse(struct node p) {
+    if(p.next == NULL) {
+        return;
+    }
+    while(p.next != NULL) {
+        p = *(p.next);
+    }
+    while(p.prev != NULL) {
+        printf("%d ", p.element);
+        p = *(p.prev);
+    }
+    printf("\n");
 }
 
 int main() {
@@ -43,6 +71,9 @@ int main() {
     insert(list, list, 3);
     insert(list, list, 7);
     insert(list, list->next->next, 2);
+
+    delete(list, list->next->next);
     printlist(*list);
+    printlist_reverse(*list);
     return 0;
 }
