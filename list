@@ -1,0 +1,48 @@
+#include <stdio.h>
+#include <stdlib.h>
+typedef struct node * link;
+typedef link list;
+typedef link position;
+
+struct node {
+    int element;
+    struct node *next, *prev;
+};
+
+list initlist() {
+    struct node * n;
+    n = (struct node *)malloc(sizeof(struct node));
+    n->next = NULL;
+    n->prev = NULL;
+}
+
+list insert(list p, position k, int e) {
+    struct node * n;
+    n = (struct node *)malloc(sizeof(struct node));
+    n->element = e;
+    if(k->next) {
+        k->next->prev = n;
+    }
+    n->next = k->next;
+    k->next = n;
+    n->prev = k;
+}
+
+void printlist(struct node p) {
+    while(p.next != NULL) {
+        p = *(p.next);
+        printf("%d ", p.element);
+    }
+}
+
+int main() {
+    struct node * list;
+    list = initlist();
+    insert(list, list, 1);
+    insert(list, list, 4);
+    insert(list, list, 3);
+    insert(list, list, 7);
+    insert(list, list->next->next, 2);
+    printlist(*list);
+    return 0;
+}
